@@ -161,6 +161,7 @@ int teaEncode(char *out_str, const char *data, const char *key_base64, size_t it
     for (size_t i = 0; i < strlen(data) / TEA_BLOCK_LEN; i++)
     {
         tea_encrypt((uint32_t *)&data[i * TEA_BLOCK_LEN], key, iter);
+        //        tea_encrypt((uint32_t*)(data + i * TEA_BLOCK_LEN), key, 16);
     }
 
     // to base64
@@ -198,6 +199,7 @@ int teaDecrypt(char *out_str, const char *data_base64, const char *key_base64, s
     for (size_t i = 0; i < strlen(data) / TEA_BLOCK_LEN; i++)
     {
         tea_decrypt((uint32_t *)&data[i * TEA_BLOCK_LEN], key, iter);
+        //        tea_encrypt((uint32_t*)(data + i * TEA_BLOCK_LEN), key, 16);
     }
     if (out_str == NULL)
     {
