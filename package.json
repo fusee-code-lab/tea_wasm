@@ -8,8 +8,5 @@
   },
   "author": "",
   "license": "ISC",
-  "description": "",
-  "devDependencies": {
-    "tea-napi": "^0.0.5"
-  }
+  "description": ""
 }
