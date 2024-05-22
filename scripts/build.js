@@ -17,7 +17,7 @@ try {
     mkdirSync(resolve("dist"));
   }
   execSync(
-    'emcc tea.c -s ASM_JS=1 -s EXPORTED_FUNCTIONS="["_malloc","_free"]" -o tea.js',
+    'emcc tea.c -s ASM_JS=1 -s EXPORT_ES6=1 -s EXPORTED_FUNCTIONS="["_malloc","_free"]" -o tea.js',
     {
       cwd: resolve("lib"),
     }
@@ -25,6 +25,7 @@ try {
   const func_str = readFileSync(resolve("lib/func.js"), { encoding: "utf8" });
   const tea_str = readFileSync(resolve("lib/tea.js"), { encoding: "utf8" });
   renameSync(resolve("lib/tea.wasm"), resolve("dist/tea.wasm"));
-  writeFileSync(resolve("dist/index.js"), tea_str + EOL + func_str);
+  renameSync(resolve("lib/tea.js"), resolve("dist/tea.js"));
+  writeFileSync(resolve("dist/index.js"), func_str);
   unlinkSync(resolve("lib/tea.js"));
 } catch (error) {}
